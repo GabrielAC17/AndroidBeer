@@ -133,7 +133,12 @@ public class BuscaCerv extends AppCompatActivity {
         cervejas = cervejaDAO.buscaCerveja(nome, tipoCerveja, tipoRaio);
         cervejaDAO.close();
         for (Cerveja c : cervejas){
-            values.add(c.getNome());
+            String obj = "Nome: " + c.getNome() + "\n";
+            obj += "Local: " + c.getLocal() + "\n";
+            obj += "Preço: R$" + c.getPreco() + "\n";
+            obj += "Localização: " + c.getLocalizacao() + "\n";
+            obj += "Tipo: " + Cerveja.getNomeTipo(c.getTipo()) + "\n";
+            values.add(obj);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, values);
         listResult.setAdapter(adapter);

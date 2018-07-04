@@ -72,7 +72,7 @@ public class CervejaDAO {
         String filter = "";
 
         if (nome != null && !nome.isEmpty()){
-            filter =  WrapperDB.colNome + " = " + nome + " " ;
+            filter =  WrapperDB.colNome + " = '" + nome + "' " ;
         }
         if (tipo != 0) {
             if (!filter.isEmpty()){
