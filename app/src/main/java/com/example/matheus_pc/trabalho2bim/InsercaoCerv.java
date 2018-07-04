@@ -1,10 +1,21 @@
 package com.example.matheus_pc.trabalho2bim;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.matheus_pc.trabalho2bim.dao.CervejaDAO;
@@ -15,11 +26,52 @@ public class InsercaoCerv extends AppCompatActivity {
     private int tipoCerveja;
     private CervejaDAO cervejaDAO;
 
+    //Loc
+    LocationManager locationManager;
+    LocationListener locationListener;
+
+    TextView loca;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insercao_cerv);
 
+        loca = findViewById(R.id.loc);
+
+        //Funções de localização
+        locationManager  = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+
+        locationListener = new MyLocationListener();
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Cara, eu preciso do GPS para continuar, sério, senão eu fecho a porra toda.")
+                        .setTitle("ALERTA, ATENÇÃO, CUIDADO!!!");
+
+                builder.setPositiveButton("Foi mal cara, tomarei cuidado", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ActivityCompat.requestPermissions(getParent(),
+                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                1);
+                    }
+                });
+                AlertDialog dialog = builder.create();
+
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+            }
+        } else {
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+        }
     }
 
     public void onRadioButtonClicked(View view) {
@@ -131,7 +183,7 @@ public class InsercaoCerv extends AppCompatActivity {
             return;
         }
         valor = Float.parseFloat(valorS);
-        String loc = ((EditText)findViewById(R.id.loc)).getText().toString();
+        String loc = ((TextView)findViewById(R.id.loc)).getText().toString();
         if (loc == null || loc.isEmpty()){
             //
         }
@@ -146,5 +198,22 @@ public class InsercaoCerv extends AppCompatActivity {
     }
     private void resetRadios(int id){
 
+    }
+
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location loc) {
+            loca.setText("Latitude: " + loc.getLatitude() + " Longitude: " + loc.getLongitude());
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {}
+
+        @Override
+        public void onProviderEnabled(String provider) {}
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
     }
 }

@@ -11,18 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignBaseline="@+id/textViewNome"
-        android:layout_alignBottom="@+id/textViewNome"
-        android:layout_alignStart="@+id/textViewNome"
-        android:text="Nome"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textViewNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="20dp"
@@ -95,15 +83,14 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/loc"
-        android:layout_width="wrap_content"
+        android:layout_width="215dp"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/radioGroup2"
         android:layout_below="@+id/valor"
-        android:layout_marginEnd="18dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_marginEnd="41dp"
+        android:ems="10" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"
