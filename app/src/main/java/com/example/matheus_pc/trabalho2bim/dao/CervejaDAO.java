@@ -80,12 +80,12 @@ public class CervejaDAO {
             }
             filter += WrapperDB.colTipo + " = " + tipo;
         }
-        if (localizacao != null && !localizacao.isEmpty()){
-            if (!filter.isEmpty()){
-                filter += " AND " ;
-            }
-            filter += WrapperDB.colLocalizacao + " = " + localizacao;
-        }
+//        if (localizacao != null && !localizacao.isEmpty()){
+//            if (!filter.isEmpty()){
+//                filter += " AND " ;
+//            }
+//            filter += WrapperDB.colLocalizacao + " = " + localizacao;
+//        }
         if (filter.isEmpty()){
             filter = null ;
         }

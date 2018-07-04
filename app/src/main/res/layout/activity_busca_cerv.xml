@@ -250,5 +250,13 @@
         android:onClick="onClickBuscar"
         android:text="Buscar" />
 
+    <TextView
+        android:id="@+id/locaat"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Obtendo Localização" />
+
 
 </RelativeLayout>

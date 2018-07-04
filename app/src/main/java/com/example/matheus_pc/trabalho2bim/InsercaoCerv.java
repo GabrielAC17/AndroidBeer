@@ -204,7 +204,7 @@ public class InsercaoCerv extends AppCompatActivity {
 
         @Override
         public void onLocationChanged(Location loc) {
-            loca.setText("Latitude: " + loc.getLatitude() + " Longitude: " + loc.getLongitude());
+            loca.setText(loc.getLatitude() + ":" + loc.getLongitude());
         }
 
         @Override
